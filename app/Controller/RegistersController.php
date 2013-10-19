@@ -43,6 +43,9 @@ class RegistersController extends AppController {
  */
     public function display() 
     {
-
-	}
+        if($this->request->is('post'))
+        {
+            $this->redirect(array('action'=>'regist'));
+        }
+    }
 }
