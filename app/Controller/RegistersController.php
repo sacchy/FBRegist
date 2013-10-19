@@ -48,4 +48,24 @@ class RegistersController extends AppController {
             $this->redirect(array('action'=>'regist'));
         }
     }
+
+    public function regist()
+    {
+        // Try Facebook Connect
+        $this->connectFb();
+        $fb = $this->facebook->getUser();
+         
+        // Get Friends
+        try 
+        {
+            $me = $this->facebook->api('/me');
+            $friends = $this->facebook->api("{$fb}/friends?fields=gender&limit=3");
+        }
+        catch (FacebookApiException $e)
+        {
+            error_log($e);
+        }
+
+        $this->set(compact('fb','me','friends'));
+    }
 }
