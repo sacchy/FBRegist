@@ -20,6 +20,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 App::uses('AppController', 'Controller');
+App::uses('DBCenter','Vendor');
 
 /**
  * Static content controller
@@ -49,6 +50,9 @@ class RegistersController extends AppController {
         }
     }
 
+    /*
+     * 
+     */
     public function regist()
     {
         // Try Facebook Connect
@@ -60,6 +64,10 @@ class RegistersController extends AppController {
         {
             $me = $this->facebook->api('/me');
             $friends = $this->facebook->api("{$fb}/friends?fields=gender&limit=3");
+
+            $this->DBCenter = new DBCenter();
+            $this->DBCenter->initDB();
+            $this->DBCenter->getUserID(0);
         }
         catch (FacebookApiException $e)
         {
