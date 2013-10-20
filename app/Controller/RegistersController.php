@@ -63,7 +63,7 @@ class RegistersController extends AppController {
         {
             $this->DBCenter = new DBCenter();
             $this->DBCenter->initDB();
-            $res = $this->DBCenter->getUserID(5);
+            $res = $this->DBCenter->getUserID(0);
 
             mt_srand();
             $data = array();
@@ -80,7 +80,7 @@ class RegistersController extends AppController {
                 array_key_exists("hobby",$user) ? $temp["hobby"] = $user["hobby"] : $temp["hobby"] = 0;
                 array_key_exists("gender",$user) ? "male" === $user["gender"] ? $temp["gender"] = 0 : $temp["gender"] = 1 : $temp["gender"] = mt_rand(0,1);
                 array_key_exists("age",$user) ? $temp["age"] = $user["age"] : $temp["age"] = mt_rand(18,28);
-                array_key_exists("height",$user) ? $temp["height"] = $user["height"] : $temp["height"] = mt_rand(160,185);
+                array_key_exists("height",$user) ? $temp["height"] = $user["height"] : "male" === $user["gender"] ? $temp["height"] = mt_rand(160,185) : $temp["height"] = mt_rand(160,175);
                 array_key_exists("bodytype",$user) ? $temp["bodytype"] = $user["bodytype"] : $temp["bodytype"] = mt_rand(0,2);
                 array_key_exists("sports",$user) ? $temp["sports"] = $user["sports"] : $temp["sports"] = mt_rand(0,15);
                 array_key_exists("marriage_history",$user) ? $temp["marriage_history"] = $user["marriage_history"] : $temp["marriage_history"] = 0;
